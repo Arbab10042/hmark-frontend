@@ -1,7 +1,7 @@
 import * as React from "react";
 
 function About() {
-  return <>About</>;
+  return <>TODO: Add team members detail</>;
 }
 
 export default About;
