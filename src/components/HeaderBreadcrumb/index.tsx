@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Breadcrumb } from "antd";
+import { Breadcrumbs, Link } from "@mui/material";
 
 const BCContainer = styled.div`
   height: 80px;
@@ -11,18 +11,18 @@ const BCContainer = styled.div`
   box-shadow: 0px 3px 2px -1px #cfcfcf;
 `;
 
-function HeaderBreadcrumb({ breadcrumbItems }: { breadcrumbItems: string[] }) {
+function HeaderBreadcrumb({ breadcrumbItems }: { breadcrumbItems: any }) {
   return (
     <BCContainer>
-      <Breadcrumb className="fs-5 ms-4">
-        {breadcrumbItems.map((item) => {
+      <Breadcrumbs className="fs-5 ms-4">
+        {breadcrumbItems.map((item: any) => {
           return (
-            <Breadcrumb.Item key={item} href="">
-              {item}
-            </Breadcrumb.Item>
+            <Link key={item.name} href={item.href}>
+              {item.name}
+            </Link>
           );
         })}
-      </Breadcrumb>
+      </Breadcrumbs>
     </BCContainer>
   );
 }

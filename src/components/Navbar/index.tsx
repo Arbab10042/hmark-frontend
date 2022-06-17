@@ -1,9 +1,24 @@
 import React from "react";
-import { ArrowRightOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { ArrowRightOutlined } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import DropdownButton, { DropdownProps } from "./components/Dropdown";
 import "./nav_style.css";
 
 function Navbar({ navBtnText }: { navBtnText?: string }) {
+  const watermarkDropdownContent: DropdownProps = {
+    header: "WATERMARK",
+    dropdownItems: [
+      {
+        name: "Image",
+        link: "/watermark-image",
+      },
+      {
+        name: "Video",
+        link: "/watermark-video",
+      },
+    ],
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-style">
       <div className="container-fluid">
@@ -33,35 +48,34 @@ function Navbar({ navBtnText }: { navBtnText?: string }) {
         >
           <ul className="ms-auto navbar-nav">
             <li className="nav-item">
-              <Button
-                type="link"
-                className="menu-item"
-                size="large"
-                href="/features"
-              >
-                Features
-              </Button>
+              <DropdownButton {...watermarkDropdownContent} />
             </li>
             <li className="nav-item">
-              <Button
-                type="link"
-                className="menu-item"
-                size="large"
-                href="/about"
-              >
-                About Us
-              </Button>
+              <DropdownButton {...watermarkDropdownContent} />
+            </li>
+            <li className="nav-item">
+              <DropdownButton {...watermarkDropdownContent} />
             </li>
           </ul>
           {navBtnText && (
             <Button
-              type="primary"
+              variant="contained"
               className="nav-btn"
-              size="large"
-              href="/watermark"
+              size="medium"
+              sx={{
+                margin: "10px",
+                background: "rgba(255, 255, 255, 0.3)",
+                fontWeight: "600",
+                fontSize: "18px",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                "&:hover": {
+                  color: "white",
+                },
+              }}
+              href="/watermark-image"
             >
               {navBtnText}
-              <ArrowRightOutlined />
+              <ArrowRightOutlined fontSize="medium" />
             </Button>
           )}
         </div>

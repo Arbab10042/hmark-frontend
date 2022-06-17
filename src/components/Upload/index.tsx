@@ -1,91 +1,129 @@
-import React from "react";
-import SVG_File from "../SVG_Component";
-import { Upload, Modal } from "antd";
-import "./style.css";
-import "antd/dist/antd.css";
+import React, { useState } from "react";
+import styled from "styled-components";
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import { IconButton, Tooltip } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
+import SVG_File from "components/SVG_Component";
 
-function getBase64(file: Blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
-
-class UploadFile extends React.Component {
-  state = {
-    previewVisible: false,
-    previewImage: "",
-    previewTitle: "",
-    fileList: [],
-  };
-
-  handleCancel = () => this.setState({ previewVisible: false });
-
-  handlePreview = async (file: {
-    url: string;
-    preview: unknown;
-    originFileObj: any;
-    name: any;
-  }) => {
-    if (!file.url && !file.preview) {
-      // eslint-disable-next-line no-param-reassign
-      file.preview = await getBase64(file.originFileObj);
-    }
-
-    this.setState({
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-      previewTitle:
-        file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
-    });
-  };
-
-  handleChange = ({ fileList }: { fileList: any }) => {
-    console.log(fileList);
-    this.setState({ fileList });
-  };
-
-  render() {
-    const { previewVisible, previewImage, fileList, previewTitle } = this.state;
-    const uploadButton = (
-      <div>
-        <div style={{ marginTop: 8, fontWeight: "bold", letterSpacing: "2px" }}>
-          SELECT FILES TO UPLOAD
-        </div>
-        <div
-          style={{
-            height: "200px",
-            width: "200px",
-          }}
-          className="mb-3"
-        >
-          <SVG_File filename="import" />
-        </div>
-      </div>
-    );
-    return (
-      <>
-        <Upload
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={(data: any) => this.handlePreview(data)}
-          onChange={this.handleChange}
-        >
-          {fileList.length >= 1 ? null : uploadButton}
-        </Upload>
-        <Modal
-          visible={previewVisible}
-          title={previewTitle}
-          footer={null}
-          onCancel={this.handleCancel}
-        >
-          <img alt="example" style={{ width: "100%" }} src={previewImage} />
-        </Modal>
-      </>
-    );
+const UploadDiv = styled.div<{ isDragging: boolean; images: any }>`
+  height: 300px;
+  width: 392px;
+  border: ${({ isDragging }) =>
+    isDragging ? "1px dashed red" : "1px solid black"};
+  margin-left: 9%;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  display: ${({ images }) => (images.length > 0 ? "none" : "flex")};
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
   }
+`;
+
+const ImageUpload = styled.div`
+  display: none;
+  position: absolute;
+  top: 42%;
+  left: 42%;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #00000070;
+  z-index: 100;
+`;
+
+const ImageDiv = styled.div<{ imageUrl: string | undefined }>`
+  background-image: url(${({ imageUrl }) => imageUrl});
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+`;
+
+const Container = styled.div`
+  position: relative;
+  height: 300px;
+  width: 392px;
+  margin-left: 9%;
+  margin-bottom: 10px;
+  &:hover ${ImageDiv} {
+    display: flex;
+    opacity: 0.5;
+  }
+  &:hover ${ImageUpload} {
+    display: block;
+  }
+`;
+
+function UploadImage() {
+  const [images, setImages] = useState([]);
+
+  const onChange = (
+    imageList: ImageListType,
+    addUpdateIndex: number[] | undefined
+  ) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList as never[]);
+  };
+  return (
+    <div className="App">
+      <ImageUploading multiple value={images} onChange={onChange}>
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper">
+            {imageList.map((image, index) => (
+              <Container key={index}>
+                <ImageDiv imageUrl={image.dataURL} className="image-item" />
+                <ImageUpload className="image-item__btn-wrapper">
+                  <IconButton
+                    onClick={() => {
+                      onImageRemove(index);
+                    }}
+                  >
+                    <Tooltip title="Remove">
+                      <DeleteOutline
+                        sx={{
+                          color: "white",
+                        }}
+                        fontSize="large"
+                      />
+                    </Tooltip>
+                  </IconButton>
+                </ImageUpload>
+              </Container>
+            ))}
+            <UploadDiv
+              isDragging={isDragging}
+              images={images}
+              onClick={() => {
+                onImageUpload();
+              }}
+              {...dragProps}
+            >
+              <SVG_File filename="import" />
+              Click or Drop here
+            </UploadDiv>
+          </div>
+        )}
+      </ImageUploading>
+    </div>
+  );
 }
 
-export default UploadFile;
+export default UploadImage;

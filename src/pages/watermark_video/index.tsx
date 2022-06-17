@@ -11,7 +11,7 @@ const BodyDiv = styled.div<{ height?: string }>`
   width: 100%;
   height: fit-content;
   text-align: center;
-  padding: 5% 10% 10% 10%;
+  padding: 2% 10% 10% 10%;
   color: #4a5568;
 `;
 
@@ -26,14 +26,18 @@ const P = styled.p<{ fontWeight?: string; fontSize?: string }>`
 `;
 
 function Watermark() {
-  const breadcrumb = ["Home", "Watermark"];
+  const breadcrumb = [
+    { name: "Home", href: "/" },
+    { name: "Watermark Video", href: "/watermark-video" },
+  ];
   return (
     <>
       <Navbar />
       <HeaderBreadcrumb breadcrumbItems={breadcrumb} />
       <BodyDiv>
-        <Title>Upload Your Files</Title>
-        <P>Most image and video types are supported.</P>
+        <Title>Upload Your Video</Title>
+        <P>Most video types are supported.</P>
+
         <div className="container ms-md-5">
           <div className="row justify-content-between">
             <div

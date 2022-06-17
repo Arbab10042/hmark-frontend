@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button } from "@mui/material";
 import "./footer_style.css";
 
 const NavigationData = ["Features", "About Us", "Get Started"];
@@ -17,7 +17,16 @@ function Footer() {
           <div className="footer-title">Navigation</div>
           {NavigationData.map((item) => {
             return (
-              <Button className="footer-item" type="link" key={item}>
+              <Button
+                className="footer-item"
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    color: "black",
+                  },
+                }}
+                key={item}
+              >
                 {item}
               </Button>
             );
@@ -27,7 +36,16 @@ function Footer() {
           <div className="footer-title">Features</div>
           {FeatureData.map((item) => {
             return (
-              <Button className="footer-item" type="link" key={item}>
+              <Button
+                className="footer-item"
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    color: "black",
+                  },
+                }}
+                key={item}
+              >
                 {item}
               </Button>
             );
@@ -36,10 +54,13 @@ function Footer() {
       </div>
       <span className="footer-span">
         <Button
-          type="link"
-          style={{
+          sx={{
             fontSize: "18px",
+            color: "white",
             marginTop: "-5px",
+            "&:hover": {
+              color: "black",
+            },
           }}
         >
           hMark

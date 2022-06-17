@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "antd";
+import { Button } from "@mui/material";
 import "../ComponentStyles/style.css";
 
 function DownloadComponent() {
@@ -15,7 +15,7 @@ function DownloadComponent() {
         }}
       ></div>
       <div style={{ width: "300px" }}>
-        <Button type="primary" className="mt-2 ms-2 action-btn">
+        <Button variant="contained" className="mt-2 ms-2 action-btn">
           Download
         </Button>
       </div>

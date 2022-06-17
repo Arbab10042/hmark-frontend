@@ -33,11 +33,15 @@ const DivContent = styled.div<{
   height?: string;
   fontSize?: string;
   fontWeight?: string;
+  hasText?: boolean;
 }>`
   width: ${({ width }) => width ?? "fit-content"};
   height: fit-content;
   font-size: ${({ fontSize }) => fontSize ?? "20px"};
   font-weight: ${({ fontWeight }) => fontWeight ?? "normal"};
+  @media screen and (max-width: 768px) {
+    margin-left: ${({ hasText }) => (hasText ? "0" : "15%")};
+  }
 `;
 
 function Home() {
@@ -48,107 +52,101 @@ function Home() {
       <BodyDiv>
         <Title>How It Works...</Title>
         <P fontSize="24px">No download or installation needed.</P>
-        <div className="container ms-5">
-          <div className="row ms-4">
-            <DivContent className="col-md-4 col-sm-12 me-5">
-              <div
-                style={{
-                  height: "200px",
-                  width: "200px",
-                }}
-                className="mb-3"
-              >
-                <SVG_File filename="import" />
-              </div>
-              <DivContent width="250px">
-                <P fontWeight="700">1. Import Files</P>
-                <P>
-                  Import photos and videos from your local device into our
-                  website.
-                </P>
-              </DivContent>
+        <div className="container d-md-flex justify-content-around">
+          <DivContent>
+            <div
+              style={{
+                height: "200px",
+                width: "200px",
+              }}
+              className="mb-3"
+            >
+              <SVG_File filename="import" />
+            </div>
+            <DivContent width="250px" hasText>
+              <P fontWeight="700">1. Import Files</P>
+              <P>
+                Import photos and videos from your local device into our
+                website.
+              </P>
             </DivContent>
-            <DivContent className="col-md-4 col-sm-12 ms-5 me-5">
-              <div
-                style={{
-                  height: "200px",
-                  width: "200px",
-                }}
-                className="mb-3"
-              >
-                <SVG_File filename="time" />
-              </div>
-              <DivContent width="250px">
-                <P fontWeight="700">2. System Processing</P>
-                <P>
-                  Wait for our server to process and completed your request.
-                </P>
-              </DivContent>
+          </DivContent>
+          <DivContent>
+            <div
+              style={{
+                height: "200px",
+                width: "200px",
+              }}
+              className="mb-3"
+            >
+              <SVG_File filename="time" />
+            </div>
+            <DivContent width="250px" hasText>
+              <P fontWeight="700">2. System Processing</P>
+              <P>Wait for our server to process and completed your request.</P>
             </DivContent>
-            <DivContent className="col-md-4 col-sm-12 ms-5">
-              <div
-                style={{
-                  height: "214px",
-                  width: "200px",
-                }}
-              >
-                <SVG_File filename="export" />
-              </div>
-              <DivContent width="280px">
-                <P fontWeight="700">3. Export Files</P>
-                <P>
-                  Once our system has finished processing. You can download your
-                  watermarked files on your device.
-                </P>
-              </DivContent>
+          </DivContent>
+          <DivContent>
+            <div
+              style={{
+                height: "214px",
+                width: "200px",
+              }}
+            >
+              <SVG_File filename="export" />
+            </div>
+            <DivContent width="280px" hasText>
+              <P fontWeight="700">3. Export Files</P>
+              <P>
+                Once our system has finished processing. You can download your
+                watermarked files on your device.
+              </P>
             </DivContent>
-          </div>
+          </DivContent>
         </div>
       </BodyDiv>
       <BodyDiv>
         <Title>Watermark Files Anywhere, Anytime</Title>
         <P>Our watermarking system is accessible from any device</P>
-        <div className="container ms-5">
-          <div className="row">
-            <DivContent className="col-md-5 ms-md-5 col-sm-12">
-              <div
-                style={{
-                  height: "200px",
-                  width: "200px",
-                }}
-                className="mb-3"
-              >
-                <SVG_File filename="watermark" />
-              </div>
-              <DivContent width="280px">
-                <P fontWeight="700">Watermark videos</P>
+        <div className="container d-md-flex justify-content-around">
+          <DivContent>
+            <div
+              style={{
+                height: "200px",
+                width: "200px",
+              }}
+              className="mb-3"
+            >
+              <SVG_File filename="watermark" />
+            </div>
+            <DivContent width="280px" hasText>
+              <P fontWeight="700">Watermark videos</P>
+              <P>
+                Watermark videos directly on our server. Videos upto 50MB in
+                size.
+              </P>
+            </DivContent>
+          </DivContent>
+          <DivContent>
+            <div
+              style={{
+                height: "200px",
+                width: "180px",
+              }}
+              className="mb-3"
+            >
+              <SVG_File filename="accessible" />
+            </div>
+            <div>
+              <DivContent width="280px" hasText>
+                <P fontWeight="700">Mobile accessible</P>
                 <P>
-                  Watermark videos directly on our server. Videos upto 50MB in
-                  size.
+                  Access or upload your files from anywhere and any device over
+                  the internet.
                 </P>
               </DivContent>
-            </DivContent>
-            <DivContent className="col-md-6 col-sm-12 ms-md-5">
-              <div
-                style={{
-                  height: "200px",
-                  width: "180px",
-                }}
-                className="mb-3"
-              >
-                <SVG_File filename="accessible" />
-              </div>
-              <div>
-                <DivContent width="280px">
-                  <P fontWeight="700">Mobile accessible</P>
-                  <P>
-                    Access or upload your files from anywhere and any device
-                    over the internet.
-                  </P>
-                </DivContent>
-              </div>
-            </DivContent>
-          </div>
+            </div>
+          </DivContent>
         </div>
       </BodyDiv>
       <Footer />

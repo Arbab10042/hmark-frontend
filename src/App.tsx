@@ -1,11 +1,10 @@
-import "antd/dist/antd.css";
-
 import * as React from "react";
 import About from "./pages/about";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Features from "./pages/features";
 import Home from "./pages/Home";
-import Watermark from "./pages/watermark";
+import WatermarkImage from "./pages/watermark_image";
+import WatermarkVideo from "./pages/watermark_video";
 
 // markup
 const App = () => {
@@ -14,9 +13,10 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/watermark" element={<Watermark />} />
+          <Route path="/watermark-image" element={<WatermarkImage />} />
+          <Route path="/watermark-video" element={<WatermarkVideo />} />
           <Route path="/features" element={<Features />} />
-          <Route path="/features" element={<About />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </div>
