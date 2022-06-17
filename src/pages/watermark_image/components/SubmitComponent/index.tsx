@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UploadFile from "../../../../components/Upload";
+import UploadFile from "components/Upload";
 import {
   Button,
   TextField,

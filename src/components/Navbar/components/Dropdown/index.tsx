@@ -7,6 +7,7 @@ const DropdownBtn = styled.button`
   background-color: transparent;
   border: none;
   margin-top: 6px;
+  margin-right: 8px;
 `;
 
 const DropdownMenu = styled.ul`

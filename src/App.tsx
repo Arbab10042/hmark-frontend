@@ -1,10 +1,9 @@
 import * as React from "react";
-import About from "./pages/about";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Features from "./pages/features";
 import Home from "./pages/Home";
 import WatermarkImage from "./pages/watermark_image";
 import WatermarkVideo from "./pages/watermark_video";
+import Authenticate_Image from "pages/authenticate_image";
 
 // markup
 const App = () => {
@@ -15,8 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/watermark-image" element={<WatermarkImage />} />
           <Route path="/watermark-video" element={<WatermarkVideo />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/authenticate-image" element={<Authenticate_Image />} />
         </Routes>
       </Router>
     </div>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import UploadVideo from "components/UploadVideo";
-
+import UploadFile from "components/Upload";
 import {
   Button,
   TextField,
@@ -23,11 +22,11 @@ function SubmitComponent() {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const infoString =
-    "This key will be used to authenticate your file. Please make sure you choose a strong key.";
+    "This key will be used to authenticate your file. Please make sure you enter the correct key.";
 
   return (
     <>
-      <UploadVideo />
+      <UploadFile />
       <div className="input-container">
         <TextField
           label="Key"

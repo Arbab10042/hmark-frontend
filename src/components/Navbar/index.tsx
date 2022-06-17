@@ -1,24 +1,11 @@
 import React from "react";
 import { ArrowRightOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import DropdownButton, { DropdownProps } from "./components/Dropdown";
+import { navbarDropdownButtons } from "constants/navbarDropdown";
+import DropdownButton from "./components/Dropdown";
 import "./nav_style.css";
 
 function Navbar({ navBtnText }: { navBtnText?: string }) {
-  const watermarkDropdownContent: DropdownProps = {
-    header: "WATERMARK",
-    dropdownItems: [
-      {
-        name: "Image",
-        link: "/watermark-image",
-      },
-      {
-        name: "Video",
-        link: "/watermark-video",
-      },
-    ],
-  };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-style">
       <div className="container-fluid">
@@ -47,15 +34,11 @@ function Navbar({ navBtnText }: { navBtnText?: string }) {
           }}
         >
           <ul className="ms-auto navbar-nav">
-            <li className="nav-item">
-              <DropdownButton {...watermarkDropdownContent} />
-            </li>
-            <li className="nav-item">
-              <DropdownButton {...watermarkDropdownContent} />
-            </li>
-            <li className="nav-item">
-              <DropdownButton {...watermarkDropdownContent} />
-            </li>
+            {navbarDropdownButtons.map((item, index) => (
+              <li key={index} className="nav-item">
+                <DropdownButton {...item} />
+              </li>
+            ))}
           </ul>
           {navBtnText && (
             <Button
