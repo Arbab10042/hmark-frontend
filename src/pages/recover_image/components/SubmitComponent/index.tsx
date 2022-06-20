@@ -25,10 +25,10 @@ function SubmitComponent({
   setResult: (result: string) => void;
 }) {
   const [images, setImages] = useState<any[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
 
-  // const [showPassword, setShowPassword] = useState(false);
-  // const handleClickShowPassword = () => setShowPassword(!showPassword);
-  // const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const handleSubmit = () => {
     if (images.length > 0) {
       console.log("BEFORE REQUEST");
@@ -37,7 +37,7 @@ function SubmitComponent({
       const dataURI = images[0].dataURL;
       const imageData = dataURI.split(",")[1];
       axios
-        .post("http://127.0.0.1:8000/image/authenticate/", {
+        .post("http://127.0.0.1:8000/image/recover/", {
           image: imageData,
         })
         .then((res) => {

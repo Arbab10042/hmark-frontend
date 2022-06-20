@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import WatermarkImage from "./pages/watermark_image";
 import WatermarkVideo from "./pages/watermark_video";
 import Authenticate_Image from "pages/authenticate_image";
+import Recover_Image from "pages/recover_image";
 
 // markup
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/watermark-image" element={<WatermarkImage />} />
           <Route path="/watermark-video" element={<WatermarkVideo />} />
           <Route path="/authenticate-image" element={<Authenticate_Image />} />
+          <Route path="/recover-image" element={<Recover_Image />} />
         </Routes>
       </Router>
     </div>

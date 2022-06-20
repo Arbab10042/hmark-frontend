@@ -35,26 +35,25 @@ const A = styled.a`
   }
 `;
 
-function Watermark() {
+function Recover_Image() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
-
   const breadcrumb = [
     { name: "Home", href: "/" },
-    { name: "Watermark Image", href: "/watermark-image" },
+    { name: "Recover Image", href: "/recover-image" },
   ];
   return (
     <>
       <Navbar />
       <HeaderBreadcrumb breadcrumbItems={breadcrumb} />
       <BodyDiv>
-        <Title>Upload Your Image</Title>
+        <Title>Upload Your Watermarked Image</Title>
         <P>Most image types are supported.</P>
         <P>
-          <A href="/watermark-video">Click Here</A> to Watermark video
+          <A href="/recover-video">Click Here</A> to Authenticate video
         </P>
 
-        <div className="container ">
+        <div className="container ms-md-5">
           <div className="row justify-content-between">
             <div
               className="col-md-5 col-sm-12"
@@ -74,4 +73,4 @@ function Watermark() {
   );
 }
 
-export default Watermark;
+export default Recover_Image;

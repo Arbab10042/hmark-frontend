@@ -16,6 +16,7 @@ const UploadDiv = styled.div<{ isDragging: boolean; images: any }>`
   display: ${({ images }) => (images.length > 0 ? "none" : "flex")};
   justify-content: center;
   align-items: center;
+  background-color: white;
   flex-direction: column;
   font-weight: bold;
   &:hover {
@@ -35,17 +36,10 @@ const ImageUpload = styled.div`
   z-index: 100;
 `;
 
-const ImageDiv = styled.div<{ imageUrl: string | undefined }>`
-  background-image: url(${({ imageUrl }) => imageUrl});
-  height: 100%;
-  width: 100%;
-  border: 1px solid black;
+const ImageDiv = styled.img`
+  height: 300px;
+  width: 392px;
   margin-bottom: 10px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 50;
 `;
 
@@ -64,15 +58,15 @@ const Container = styled.div`
   }
 `;
 
-function UploadImage() {
-  const [images, setImages] = useState([]);
+function UploadImage({ images, setImages }: { images: any; setImages: any }) {
+  // const [images, setImages] = useState([]);
 
   const onChange = (
     imageList: ImageListType,
     addUpdateIndex: number[] | undefined
   ) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList as never[]);
   };
   return (
@@ -89,7 +83,14 @@ function UploadImage() {
           <div className="upload__image-wrapper">
             {imageList.map((image, index) => (
               <Container key={index}>
-                <ImageDiv imageUrl={image.dataURL} className="image-item" />
+                {/* <ImageDiv imageUrl={image.dataURL} className="image-item" /> */}
+                <ImageDiv
+                  src={image.dataURL}
+                  height="300px"
+                  width="392px"
+                  alt="image"
+                  className="image-item"
+                />
                 <ImageUpload className="image-item__btn-wrapper">
                   <IconButton
                     onClick={() => {

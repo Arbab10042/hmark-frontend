@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import HeaderBreadcrumb from "../../components/HeaderBreadcrumb";
@@ -36,6 +36,8 @@ const A = styled.a`
 `;
 
 function Authenticate_Image() {
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState("");
   const breadcrumb = [
     { name: "Home", href: "/" },
     { name: "Authenticate Image", href: "/authenticate-image" },
@@ -57,10 +59,10 @@ function Authenticate_Image() {
               className="col-md-5 col-sm-12"
               style={{ margin: "10px 0 10px 0" }}
             >
-              <SubmitComponent />
+              <SubmitComponent setLoading={setLoading} setResult={setResult} />
             </div>
             <div className="col-md-5 col-sm-12" style={{ marginLeft: "25px" }}>
-              <DownloadComponent />
+              <DownloadComponent loading={loading} result={result} />
             </div>
           </div>
         </div>
