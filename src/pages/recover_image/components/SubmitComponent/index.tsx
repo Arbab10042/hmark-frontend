@@ -26,6 +26,7 @@ function SubmitComponent({
 }) {
   const [images, setImages] = useState<any[]>([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -39,6 +40,7 @@ function SubmitComponent({
       axios
         .post("http://127.0.0.1:8000/image/recover/", {
           image: imageData,
+          key: password,
         })
         .then((res) => {
           console.log("AFTER REQUEST");
@@ -53,21 +55,27 @@ function SubmitComponent({
     }
   };
 
-  // const infoString =
-  //   "This key will be used to authenticate your file. Please make sure you enter the correct key.";
+  const onChangeHandler = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const infoString =
+    "This key will be used to authenticate your file. Please make sure you enter the correct key.";
 
   return (
     <>
-      <UploadFile images={images} setImages={setImages} />
+      <UploadFile images={images} setImages={setImages} setResult={setResult} />
       <div className="input-container">
-        {/* <TextField
+        <TextField
           label="Key"
           variant="outlined"
           type={showPassword ? "text" : "password"}
           sx={{
-            width: "300px",
+            marginTop: "10px",
+            marginRight: "10px",
+            width: "55%",
           }}
-          // onChange={someChangeHandler}
+          onChange={onChangeHandler}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -85,17 +93,17 @@ function SubmitComponent({
               </InputAdornment>
             ),
           }}
-        /> */}
+        />
         <Button
           variant="contained"
           onClick={handleSubmit}
-          className="action-btn mt-1 ms-2"
+          className="action-btn mt-2"
         >
           Submit
         </Button>
-        {/* <Tooltip title={infoString} className="mt-2 ms-2">
+        <Tooltip title={infoString} className="mt-2 ms-2">
           <InfoOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-        </Tooltip> */}
+        </Tooltip>
       </div>
     </>
   );

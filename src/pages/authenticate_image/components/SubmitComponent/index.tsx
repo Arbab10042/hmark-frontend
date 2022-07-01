@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import UploadFile from "components/Upload";
-import {
-  Button,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
-
-import {
-  VisibilityOutlined,
-  VisibilityOffOutlined,
-  InfoOutlined,
-} from "@mui/icons-material";
-
+import { Button } from "@mui/material";
 import "../ComponentStyles/style.css";
 
 function SubmitComponent({
@@ -26,9 +13,6 @@ function SubmitComponent({
 }) {
   const [images, setImages] = useState<any[]>([]);
 
-  // const [showPassword, setShowPassword] = useState(false);
-  // const handleClickShowPassword = () => setShowPassword(!showPassword);
-  // const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const handleSubmit = () => {
     if (images.length > 0) {
       console.log("BEFORE REQUEST");
@@ -53,49 +37,17 @@ function SubmitComponent({
     }
   };
 
-  // const infoString =
-  //   "This key will be used to authenticate your file. Please make sure you enter the correct key.";
-
   return (
     <>
-      <UploadFile images={images} setImages={setImages} />
+      <UploadFile images={images} setImages={setImages} setResult={setResult} />
       <div className="input-container">
-        {/* <TextField
-          label="Key"
-          variant="outlined"
-          type={showPassword ? "text" : "password"}
-          sx={{
-            width: "300px",
-          }}
-          // onChange={someChangeHandler}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? (
-                    <VisibilityOutlined />
-                  ) : (
-                    <VisibilityOffOutlined />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        /> */}
         <Button
           variant="contained"
           onClick={handleSubmit}
-          className="action-btn mt-1 ms-2"
+          className="action-btn mt-2"
         >
           Submit
         </Button>
-        {/* <Tooltip title={infoString} className="mt-2 ms-2">
-          <InfoOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-        </Tooltip> */}
       </div>
     </>
   );

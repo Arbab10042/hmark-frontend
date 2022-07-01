@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Navbar from "../../components/Navbar";
-import HeaderBreadcrumb from "../../components/HeaderBreadcrumb";
+import Navbar from "components/Navbar";
+import HeaderBreadcrumb from "components/HeaderBreadcrumb";
 import SubmitComponent from "./components/SubmitComponent";
-import DownloadComponent from "./components/DownloadComponent";
-import Footer from "../../components/Footer";
+import DownloadComponent from "components/DownloadComponent";
+import Footer from "components/Footer";
 
 const BodyDiv = styled.div<{ height?: string }>`
   background-color: "#ecf3fc";
@@ -54,15 +54,22 @@ function Watermark() {
           <A href="/watermark-video">Click Here</A> to Watermark video
         </P>
 
-        <div className="container ">
-          <div className="row justify-content-between">
+        <div className="container">
+          <div className="row">
             <div
-              className="col-md-5 col-sm-12"
-              style={{ margin: "10px 0 10px 0" }}
+              className="col-md-6 col-sm-12 mb-4 mb-md-0"
+              style={{
+                padding: "0",
+              }}
             >
               <SubmitComponent setLoading={setLoading} setResult={setResult} />
             </div>
-            <div className="col-md-5 col-sm-12" style={{ marginLeft: "5%" }}>
+            <div
+              className="col-md-6 col-sm-12 mb-4 mb-md-0"
+              style={{
+                padding: "0",
+              }}
+            >
               <DownloadComponent loading={loading} result={result} />
             </div>
           </div>

@@ -7,11 +7,10 @@ import SVG_File from "components/SVG_Component";
 
 const UploadDiv = styled.div<{ isDragging: boolean; images: any }>`
   height: 300px;
-  width: 392px;
+  max-width: 65%;
   border: ${({ isDragging }) =>
     isDragging ? "1px dashed red" : "1px solid black"};
-  margin-left: 9%;
-  margin-bottom: 10px;
+  margin: 0 auto;
   padding-bottom: 10px;
   display: ${({ images }) => (images.length > 0 ? "none" : "flex")};
   justify-content: center;
@@ -22,13 +21,25 @@ const UploadDiv = styled.div<{ isDragging: boolean; images: any }>`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1280px) {
+    max-width: 75%;
+  }
+
+  @media screen and (max-width: 1050px) {
+    max-width: 85%;
+  }
+
+  @media screen and (max-width: 940px) {
+    max-width: 100%;
+  }
 `;
 
 const ImageUpload = styled.div`
   display: none;
   position: absolute;
   top: 42%;
-  left: 42%;
+  left: 45%;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -38,19 +49,15 @@ const ImageUpload = styled.div`
 
 const ImageDiv = styled.img`
   height: 300px;
-  width: 392px;
-  margin-bottom: 10px;
+  max-width: 100%;
   z-index: 50;
 `;
 
 const Container = styled.div`
   position: relative;
   height: 300px;
-  width: 392px;
-  margin-left: 9%;
-  margin-bottom: 10px;
+  max-width: 100%;
   &:hover ${ImageDiv} {
-    display: flex;
     opacity: 0.5;
   }
   &:hover ${ImageUpload} {
@@ -58,7 +65,15 @@ const Container = styled.div`
   }
 `;
 
-function UploadImage({ images, setImages }: { images: any; setImages: any }) {
+function UploadImage({
+  images,
+  setImages,
+  setResult,
+}: {
+  images: any;
+  setImages: any;
+  setResult?: (result: string) => void;
+}) {
   // const [images, setImages] = useState([]);
 
   const onChange = (
@@ -83,18 +98,16 @@ function UploadImage({ images, setImages }: { images: any; setImages: any }) {
           <div className="upload__image-wrapper">
             {imageList.map((image, index) => (
               <Container key={index}>
-                {/* <ImageDiv imageUrl={image.dataURL} className="image-item" /> */}
                 <ImageDiv
                   src={image.dataURL}
-                  height="300px"
-                  width="392px"
                   alt="image"
                   className="image-item"
                 />
-                <ImageUpload className="image-item__btn-wrapper">
+                <ImageUpload>
                   <IconButton
                     onClick={() => {
                       onImageRemove(index);
+                      if (!!setResult) setResult("");
                     }}
                   >
                     <Tooltip title="Remove">

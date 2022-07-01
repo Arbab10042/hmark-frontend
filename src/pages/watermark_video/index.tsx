@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Navbar from "../../components/Navbar";
-import HeaderBreadcrumb from "../../components/HeaderBreadcrumb";
+import Navbar from "components/Navbar";
+import HeaderBreadcrumb from "components/HeaderBreadcrumb";
 import SubmitComponent from "./components/SubmitComponent";
-import DownloadComponent from "./components/DownloadComponent";
-import Footer from "../../components/Footer";
+import VideoDownloadComponent from "components/VideoDownloadComponent";
+import Footer from "components/Footer";
 
 const BodyDiv = styled.div<{ height?: string }>`
   background-color: "#ecf3fc";
@@ -25,29 +25,38 @@ const P = styled.p<{ fontWeight?: string; fontSize?: string }>`
   font-size: ${({ fontWeight }) => fontWeight ?? "18px"}; ;
 `;
 
-function Watermark() {
+function Watermark_Video() {
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
   const breadcrumb = [
     { name: "Home", href: "/" },
-    { name: "Watermark Video", href: "/watermark-video" },
+    { name: "Authenticate Video", href: "/authenticate-video" },
   ];
   return (
     <>
       <Navbar />
       <HeaderBreadcrumb breadcrumbItems={breadcrumb} />
       <BodyDiv>
-        <Title>Upload Your Video</Title>
+        <Title>Upload Your Watermarked Video</Title>
         <P>Most video types are supported.</P>
 
-        <div className="container ms-md-5">
-          <div className="row justify-content-between">
+        <div className="container">
+          <div className="row">
             <div
-              className="col-md-5 col-sm-12"
-              style={{ margin: "10px 0 10px 0" }}
+              className="col-md-6 col-sm-12 mb-4 mb-md-0"
+              style={{
+                padding: "0",
+              }}
             >
               <SubmitComponent />
             </div>
-            <div className="col-md-5 col-sm-12" style={{ marginLeft: "25px" }}>
-              <DownloadComponent />
+            <div
+              className="col-md-6 col-sm-12 mb-4 mb-md-0"
+              style={{
+                padding: "0",
+              }}
+            >
+              <VideoDownloadComponent loading={loading} result={result} />
             </div>
           </div>
         </div>
@@ -58,4 +67,4 @@ function Watermark() {
   );
 }
 
-export default Watermark;
+export default Watermark_Video;

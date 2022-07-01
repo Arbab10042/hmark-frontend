@@ -6,10 +6,10 @@ import SVG_File from "components/SVG_Component";
 
 const UploadDiv = styled.div<{ source: any }>`
   height: 300px;
-  width: 392px;
+  max-width: 65%;
   border: 1px solid black;
-  margin-left: 9%;
-  margin-bottom: 10px;
+  background-color: white;
+  margin: 0 auto;
   padding-bottom: 10px;
   display: ${({ source }) => (source.length > 0 ? "none" : "flex")};
   justify-content: center;
@@ -19,21 +19,31 @@ const UploadDiv = styled.div<{ source: any }>`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1280px) {
+    max-width: 75%;
+  }
+
+  @media screen and (max-width: 1050px) {
+    max-width: 85%;
+  }
+
+  @media screen and (max-width: 940px) {
+    max-width: 100%;
+  }
 `;
 
 const Container = styled.div`
   height: 300px;
-  width: 392px;
-  margin-left: 9%;
-  margin-bottom: 30px;
-  margin-top: -20px;
+  max-width: 100%;
 `;
 
-function UploadVideo() {
+function UploadVideo({ setVideo }: { setVideo: any }) {
   const inputRef = useRef() as any;
 
   const [source, setSource] = useState("");
   const handleFileChange = (event: any) => {
+    setVideo(event.target.files[0]);
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
     setSource(url);
@@ -55,6 +65,8 @@ function UploadVideo() {
             ref={inputRef}
             className="VideoInput_input"
             type="file"
+            id="file"
+            name="file"
             onChange={handleFileChange}
             accept=".mov,.mp4"
           />
@@ -81,7 +93,7 @@ function UploadVideo() {
               />
             </Tooltip>
           </IconButton>
-          <video width="100%" height="95%" controls src={source} />
+          <video width="100%" height="88%" controls src={source} />
         </Container>
       )}
     </div>

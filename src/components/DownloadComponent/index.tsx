@@ -1,16 +1,45 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import "../ComponentStyles/style.css";
-import loadingGif from "../../../../assets/loading.gif";
+import "./style.css";
+import loadingGif from "../../assets/loading.gif";
 
 const DownloadDiv = styled.div<{ res: string }>`
   display: ${({ res }) => (res.length > 0 ? "none" : "block")};
-  margin-top: 10px;
+  margin: 0 auto;
   height: 300px;
-  width: 392px;
+  min-width: 65%;
   border: 1px solid black;
   background-color: white;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1280px) {
+    min-width: 75%;
+  }
+
+  @media screen and (max-width: 1050px) {
+    min-width: 85%;
+  }
+
+  @media screen and (max-width: 940px) {
+    min-width: 100%;
+    margin-left: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    min-width: 100%;
+    margin-left: 0px;
+  }
+`;
+
+const ImageDiv = styled.img`
+  height: 300px;
+  max-width: 100%;
+`;
+
+const Container = styled.div`
+  height: 300px;
+  max-width: 100%;
 `;
 
 function DownloadComponent({
@@ -40,7 +69,7 @@ function DownloadComponent({
   };
 
   return (
-    <div className="d-flex flex-column justify-content-center">
+    <div className="d-flex flex-column">
       <DownloadDiv res={result}>
         {loading && (
           <img
@@ -52,9 +81,11 @@ function DownloadComponent({
         )}
       </DownloadDiv>
       {result.length > 0 && (
-        <img src={result} height="300px" width="392px" alt="response" />
+        <Container>
+          <ImageDiv src={result} alt="response" />
+        </Container>
       )}
-      <div style={{ width: "300px", marginLeft: "50px" }}>
+      <div style={{ width: "300px", margin: "0 auto" }}>
         <Button
           variant="contained"
           className="mt-2 action-btn"

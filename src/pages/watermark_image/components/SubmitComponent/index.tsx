@@ -25,9 +25,13 @@ function SubmitComponent({
   setResult: (result: string) => void;
 }) {
   const [images, setImages] = useState<any[]>([]);
-  // const [showPassword, setShowPassword] = useState(false);
-  // const handleClickShowPassword = () => setShowPassword(!showPassword);
-  // const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
   const handleSubmit = () => {
     if (images.length > 0) {
       console.log("BEFORE REQUEST");
@@ -38,6 +42,7 @@ function SubmitComponent({
       axios
         .post("http://127.0.0.1:8000/image/watermark/", {
           image: imageData,
+          key: password,
         })
         .then((res) => {
           console.log("AFTER REQUEST");
@@ -52,21 +57,31 @@ function SubmitComponent({
     }
   };
 
-  // const infoString =
-  //   "This key will be used to authenticate your file. Please make sure you choose a strong key.";
+  const onChangeHandler = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const infoString =
+    "This key will be used to recover your file. Please make sure you choose a strong key. NOTE: This is optional";
 
   return (
     <>
-      <UploadImage images={images} setImages={setImages} />
+      <UploadImage
+        images={images}
+        setImages={setImages}
+        setResult={setResult}
+      />
       <div className="input-container">
-        {/* <TextField
+        <TextField
           label="Key"
           variant="outlined"
           type={showPassword ? "text" : "password"}
           sx={{
-            width: "300px",
+            marginTop: "10px",
+            marginRight: "10px",
+            width: "55%",
           }}
-          // onChange={someChangeHandler}
+          onChange={onChangeHandler}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -84,17 +99,17 @@ function SubmitComponent({
               </InputAdornment>
             ),
           }}
-        /> */}
+        />
         <Button
           variant="contained"
           onClick={handleSubmit}
-          className="action-btn mt-1 ms-2"
+          className="action-btn mt-2"
         >
           Submit
         </Button>
-        {/* <Tooltip title={infoString} className="mt-2 ms-2">
+        <Tooltip title={infoString} className="mt-2 ms-2">
           <InfoOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-        </Tooltip> */}
+        </Tooltip>
       </div>
     </>
   );
